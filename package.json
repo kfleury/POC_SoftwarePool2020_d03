@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/kfleury/POC_SoftwarePool2020_d03#readme",
   "dependencies": {
+    "@types/express": "^4.17.3",
+    "fs": "0.0.1-security",
+    "process": "^0.11.10",
     "uuid": "^7.0.1"
   }
 }
