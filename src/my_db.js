@@ -91,43 +91,67 @@ class myDb {
     }
 
     async getAccount(id) {
-        if (!this.json.account[id]) {
+        if (this.json.account.length - 1 < id) {
             console.error("This id isn't exist");
             return;
         }
-        return (this.json.account[id]);
+        let item = 0;
+        for (item in this.json.account) {
+            if (this.json.account[item].owner_id === id) {
+                break;
+            }
+        }
+        return (this.json.account[item]);
     }
 
     async creditAccount(id, amount) {
-        if (!this.json.account[id]) {
+        if (this.json.account.length - 1 < id) {
             console.error("This id isn't exist");
             return;
+        }
+        let item = 0;
+        for (item in this.json.account) {
+            if (this.json.account[item].owner_id === id) {
+                break;
+            }
         }
         if (amount <= 0) {
             console.error("You can't add >= 0");
             return;
         }
-        return (this.json.account[id].initialBalance = this.json.account[id].initialBalance + amount);
+        return (this.json.account[item].initialBalance = this.json.account[item].initialBalance + amount);
     }
 
     async withdrawAccount(id, amount) {
-        if (!this.json.account[id]) {
+        if (this.json.account.length - 1 < id) {
             console.error("This id isn't exist");
             return;
+        }
+        let item = 0;
+        for (item in this.json.account) {
+            if (this.json.account[item].owner_id === id) {
+                break;
+            }
         }
         if (amount <= 0) {
             console.error("You can't add >= 0");
             return;
         }
-        return (this.json.account[id].initialBalance = this.json.account[id].initialBalance - amount);
+        return (this.json.account[item].initialBalance = this.json.account[item].initialBalance - amount);
     }
 
     async deleteAccount(id) {
-        if (!this.json.account[id]) {
+        if (this.json.account.length - 1 < id) {
             console.error("This id isn't exist");
             return;
         }
-        return (this.json.account.splice(id, 1));
+        let item = 0;
+        for (item in this.json.account) {
+            if (this.json.account[item].owner_id === id) {
+                break;
+            }
+        }
+        return (this.json.account.splice(item, 1));
     }
 }
 
@@ -140,8 +164,8 @@ async function Users(re) {
 }
 
 async function Account(re) {
-    await re.createAccount('a', 10000);
     await re.createAccount(1, 10000);
+    await re.createAccount(0, 10000);
     await re.creditAccount(0, 5000);
     await re.withdrawAccount(0, 2500);
 }
